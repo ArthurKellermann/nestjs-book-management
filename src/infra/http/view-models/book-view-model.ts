@@ -1,4 +1,4 @@
-import { Book } from 'src/app/entities/book';
+import { Book } from 'src/application/entities/book';
 
 export class BookViewModel {
   static toHTTP({ id, title, description, bar_code }: Book) {

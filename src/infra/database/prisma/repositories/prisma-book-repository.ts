@@ -1,8 +1,8 @@
-import { Book } from 'src/app/entities/book';
-import { BookRepository } from 'src/app/repositories/book-repository';
-import { PrismaService } from 'src/modules/database/prisma/prisma.service';
+import { Book } from 'src/application/entities/book';
+import { BookRepository } from 'src/application/repositories/book-repository';
+import { PrismaService } from 'src/infra/database/prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
-import { BookAlreadyExists } from 'src/app/use-cases/errors/book-already-exists';
+import { BookAlreadyExists } from 'src/application/use-cases/errors/book-already-exists';
 import { PrismaBookMapper } from '../mappers/prisma-book-mapper';
 
 @Injectable()
@@ -25,5 +25,14 @@ export class PrismaBookRepository implements BookRepository {
     await this.prisma.book.create({
       data: raw,
     });
+  }
+
+  async findMany() {
+    const books = await this.prisma.book.findMany();
+    return books;
+  }
+
+  async findById(bookId: string): Promise<Book> {
+    throw new Error('Method not implemented.');
   }
 }
