@@ -67,4 +67,14 @@ export class PrismaBookRepository implements BookRepository {
 
     return PrismaBookMapper.toDomain(book);
   }
+
+  async delete(bookId: string): Promise<void> {
+    await this.prisma.book.delete({
+      where: {
+        id: bookId,
+      },
+    });
+
+    return;
+  }
 }

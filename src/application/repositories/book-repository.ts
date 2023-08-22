@@ -6,4 +6,5 @@ export abstract class BookRepository {
   abstract findMany(): Promise<Book[]>;
   abstract findById(bookId: string): Promise<Book> | null;
   abstract update(bookId: string, data: CreateBookBody): Promise<Book>;
+  abstract delete(bookId: string): Promise<void>;
 }
