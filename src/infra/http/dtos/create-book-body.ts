@@ -1,4 +1,4 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, MaxLength } from 'class-validator';
 
 export class CreateBookBody {
   id?: string;
@@ -6,8 +6,10 @@ export class CreateBookBody {
   @IsNotEmpty()
   title: string;
 
+  @MaxLength(240)
   description: string;
 
   @IsNotEmpty()
+  @MaxLength(100)
   bar_code: string;
 }
