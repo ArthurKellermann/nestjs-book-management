@@ -27,12 +27,21 @@ export class PrismaBookRepository implements BookRepository {
     });
   }
 
-  async findMany() {
+  async findMany(): Promise<Book[]> {
     const books = await this.prisma.book.findMany();
-    return books;
+    return books.map(PrismaBookMapper.toDomain);
   }
 
   async findById(bookId: string): Promise<Book> {
-    throw new Error('Method not implemented.');
+    const book = await this.prisma.book.findUnique({
+      where: {
+        id: bookId,
+      },
+    });
+
+    if (!book) {
+      return null;
+    }
+    return PrismaBookMapper.toDomain(book);
   }
 }

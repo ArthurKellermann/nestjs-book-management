@@ -13,6 +13,6 @@ export class ListBooks {
   async execute(): Promise<ListBooksResponse> {
     const books = await this.bookRepository.findMany();
 
-    return books;
+    return { books };
   }
 }
