@@ -2,6 +2,7 @@ import { InMemoryBooksRepository } from '@test/repositories/in-memory-books-repo
 import { GetBookById } from '../get-book-by-id';
 import { UpdateBookById } from '../update-book-by-id';
 import { Book } from '@app/entities/book';
+import { makeBook } from '@test/factories/book-factory';
 
 describe('Update a book by id', () => {
   let bookRepository: InMemoryBooksRepository;
@@ -15,11 +16,7 @@ describe('Update a book by id', () => {
   });
 
   it('should be able to update a book by id', async () => {
-    const exampleBook = new Book({
-      title: 'Harry Potter',
-      description: 'Great book!',
-      bar_code: 'example-bar-code-2',
-    });
+    const exampleBook = new Book(makeBook());
 
     await bookRepository.create(exampleBook);
 
@@ -36,7 +33,8 @@ describe('Update a book by id', () => {
 
     expect(book).toBeTruthy();
     expect(book.title).toBe('Harry Potter UPDATED');
-    expect(book.description).toBe('Great book!');
-    expect(book.bar_code).toBe('example-bar-code-2');
+    expect(book.description).toBe('example-description');
+    expect(book.category).toBe('romance');
+    expect(book.bar_code).toBe('example-bar-code');
   });
 });

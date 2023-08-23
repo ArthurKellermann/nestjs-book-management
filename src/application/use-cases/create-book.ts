@@ -5,6 +5,7 @@ import { BookRepository } from '../repositories/book-repository';
 interface CreateBookRequest {
   title: string;
   description: string;
+  category: string;
   bar_code: string;
 }
 
@@ -17,10 +18,11 @@ export class CreateBook {
   constructor(private bookRepository: BookRepository) {}
 
   async execute(request: CreateBookRequest): Promise<CreateBookResponse> {
-    const { title, description, bar_code } = request;
+    const { title, description, category, bar_code } = request;
     const book = new Book({
       title,
       description,
+      category,
       bar_code,
     });
 

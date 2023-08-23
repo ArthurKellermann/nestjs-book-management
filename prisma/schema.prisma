@@ -12,6 +12,7 @@ model Book {
   id          String @id @default(uuid())
   title       String 
   description String
+  category    String
   bar_code    String @unique
 
   @@map("books")

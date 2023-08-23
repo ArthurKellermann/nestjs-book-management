@@ -77,4 +77,14 @@ export class PrismaBookRepository implements BookRepository {
 
     return;
   }
+
+  async findByCategory(category: string): Promise<Book[]> {
+    const books = await this.prisma.book.findMany({
+      where: {
+        category,
+      },
+    });
+
+    return books.map(PrismaBookMapper.toDomain);
+  }
 }

@@ -6,6 +6,7 @@ import { ListBooks } from 'src/application/use-cases/list-books';
 import { GetBookById } from 'src/application/use-cases/get-book-by-id';
 import { UpdateBookById } from 'src/application/use-cases/update-book-by-id';
 import { DeleteBookById } from 'src/application/use-cases/delete-book-by-id';
+import { FindBooksByCategory } from '@app/use-cases/find-books-by-category';
 
 @Module({
   imports: [DatabaseModule],
@@ -16,6 +17,7 @@ import { DeleteBookById } from 'src/application/use-cases/delete-book-by-id';
     GetBookById,
     UpdateBookById,
     DeleteBookById,
+    FindBooksByCategory,
   ],
 })
 export class HttpModule {}

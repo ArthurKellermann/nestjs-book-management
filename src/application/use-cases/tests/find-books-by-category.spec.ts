@@ -1,18 +1,18 @@
 import { InMemoryBooksRepository } from '@test/repositories/in-memory-books-repository';
-import { GetBookById } from '../get-book-by-id';
 import { Book } from '@app/entities/book';
 import { makeBook } from '@test/factories/book-factory';
+import { FindBooksByCategory } from '../find-books-by-category';
 
-describe('Get a book by id', () => {
+describe('Find a book by category', () => {
   let bookRepository: InMemoryBooksRepository;
-  let getById: GetBookById;
+  let findByCategory: FindBooksByCategory;
 
   beforeEach(() => {
     bookRepository = new InMemoryBooksRepository();
-    getById = new GetBookById(bookRepository);
+    findByCategory = new FindBooksByCategory(bookRepository);
   });
 
-  it('should be able to get a book by id', async () => {
+  it('should be able to find a book by category', async () => {
     const exampleBook = new Book(
       makeBook({
         bar_code: 'example-bar-code-1',
@@ -37,11 +37,11 @@ describe('Get a book by id', () => {
       ),
     );
 
-    const { book } = await getById.execute({
-      bookId: exampleBook.id,
+    const { book } = await findByCategory.execute({
+      category: exampleBook.category,
     });
 
     expect(book).toBeTruthy();
-    expect(book).toEqual(exampleBook);
+    expect(book[0].category).toEqual(exampleBook.category);
   });
 });

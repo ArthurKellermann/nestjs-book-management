@@ -2,6 +2,7 @@ import { InMemoryBooksRepository } from '@test/repositories/in-memory-books-repo
 import { Book } from '@app/entities/book';
 import { DeleteBookById } from '../delete-book-by-id';
 import { GetBookById } from '../get-book-by-id';
+import { makeBook } from '@test/factories/book-factory';
 
 describe('Delete a book by id', () => {
   let bookRepository: InMemoryBooksRepository;
@@ -15,11 +16,7 @@ describe('Delete a book by id', () => {
   });
 
   it('should be able to delete a book by id', async () => {
-    const exampleBook = new Book({
-      title: 'Harry Potter',
-      description: 'Great book!',
-      bar_code: 'example-bar-code-2',
-    });
+    const exampleBook = new Book(makeBook());
 
     await bookRepository.create(exampleBook);
 

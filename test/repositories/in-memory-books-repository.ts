@@ -19,6 +19,13 @@ export class InMemoryBooksRepository implements BookRepository {
     return this.books;
   }
 
+  async findByCategory(category: string): Promise<Book[]> {
+    const book =
+      this.books.filter((item) => item.category === category) || null;
+
+    return book;
+  }
+
   async update(bookId: string, data: UpdateBookBody): Promise<Book> {
     const book = this.books.find((b) => b.id === bookId);
     if (!book) {

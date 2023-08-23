@@ -20,11 +20,12 @@ export class UpdateBookById {
     request: UpdateBookByIdRequest,
   ): Promise<UpdateBookByIdResponse> {
     const { bookId, data } = request;
-    const { title, description, bar_code } = data;
+    const { title, description, category, bar_code } = data;
 
     const book = await this.bookRepository.update(bookId, {
       title,
       description,
+      category,
       bar_code,
     });
 

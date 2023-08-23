@@ -15,6 +15,8 @@ import { GetBookById } from 'src/application/use-cases/get-book-by-id';
 import { UpdateBookBody } from '../dtos/update-book-body';
 import { UpdateBookById } from 'src/application/use-cases/update-book-by-id';
 import { DeleteBookById } from 'src/application/use-cases/delete-book-by-id';
+import { FindBooksByCategory } from '@app/use-cases/find-books-by-category';
+import { FindBooksByCategoryBody } from '../dtos/find-book-by-category-body';
 
 @Controller('books')
 export class BookController {
@@ -24,14 +26,16 @@ export class BookController {
     private getBookById: GetBookById,
     private updateBook: UpdateBookById,
     private deleteBook: DeleteBookById,
+    private findByCategory: FindBooksByCategory,
   ) {}
 
   @Post()
   async create(@Body() body: CreateBookBody) {
-    const { title, description, bar_code } = body;
+    const { title, description, category, bar_code } = body;
     const { book } = await this.createBook.execute({
       title,
       description,
+      category,
       bar_code,
     });
 
@@ -58,17 +62,29 @@ export class BookController {
     };
   }
 
+  @Post('/categories')
+  async findBookByCategory(@Body() { category }: FindBooksByCategoryBody) {
+    const { book } = await this.findByCategory.execute({
+      category,
+    });
+
+    return {
+      book: BookViewModel.toHTTPList(book),
+    };
+  }
+
   @Patch(':bookId')
   async updateBookById(
     @Param('bookId') bookId: string,
     @Body() body: UpdateBookBody,
   ) {
-    const { title, description, bar_code } = body;
+    const { title, description, category, bar_code } = body;
     const { book } = await this.updateBook.execute({
       bookId,
       data: {
         title,
         description,
+        category,
         bar_code,
       },
     });

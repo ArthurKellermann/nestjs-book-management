@@ -1,11 +1,9 @@
-import { MaxLength } from 'class-validator';
-
 export class UpdateBookBody {
   title?: string;
 
-  @MaxLength(240)
+  category?: string;
+
   description?: string;
 
-  @MaxLength(100)
   bar_code?: string;
 }

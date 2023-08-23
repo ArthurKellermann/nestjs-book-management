@@ -7,15 +7,23 @@ export class PrismaBookMapper {
       id: book.id,
       title: book.title,
       description: book.description,
+      category: book.category,
       bar_code: book.bar_code,
     };
   }
 
-  static toDomain({ id, title, description, bar_code }: RawBook): Book {
+  static toDomain({
+    id,
+    title,
+    description,
+    category,
+    bar_code,
+  }: RawBook): Book {
     return new Book(
       {
         title,
         description,
+        category,
         bar_code,
       },
       id,

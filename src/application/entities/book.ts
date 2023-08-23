@@ -3,6 +3,7 @@ import { randomUUID } from 'crypto';
 export interface BookProps {
   title: string;
   description: string;
+  category: string;
   bar_code: string;
 }
 
@@ -30,6 +31,13 @@ export class Book {
   }
   public set description(description: string) {
     this.props.description = description;
+  }
+
+  public get category(): string {
+    return this.props.category;
+  }
+  public set category(category: string) {
+    this.props.category = category;
   }
 
   public get bar_code(): string {
