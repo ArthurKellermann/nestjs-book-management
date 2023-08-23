@@ -9,4 +9,12 @@ export class BookViewModel {
       bar_code,
     };
   }
+  static toHTTPList(books: Book[]): Book[] {
+    const mappedBooks = [];
+    for (const book of books) {
+      mappedBooks.push(this.toHTTP(book));
+    }
+
+    return mappedBooks;
+  }
 }
