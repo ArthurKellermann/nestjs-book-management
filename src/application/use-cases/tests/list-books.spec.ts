@@ -2,7 +2,7 @@ import { InMemoryBooksRepository } from '@test/repositories/in-memory-books-repo
 import { ListBooks } from '../list-books';
 import { CreateBook } from '../create-book';
 
-describe('List books', () => {
+describe('List all the books', () => {
   let bookRepository: InMemoryBooksRepository;
   let listBooks: ListBooks;
   let createBook: CreateBook;

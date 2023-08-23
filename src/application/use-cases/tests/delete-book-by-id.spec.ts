@@ -1,17 +1,20 @@
 import { InMemoryBooksRepository } from '@test/repositories/in-memory-books-repository';
-import { GetBookById } from '../get-book-by-id';
 import { Book } from '@app/entities/book';
+import { DeleteBookById } from '../delete-book-by-id';
+import { GetBookById } from '../get-book-by-id';
 
-describe('Get a book by id', () => {
+describe('Delete a book by id', () => {
   let bookRepository: InMemoryBooksRepository;
+  let deleteById: DeleteBookById;
   let getById: GetBookById;
 
   beforeEach(() => {
     bookRepository = new InMemoryBooksRepository();
+    deleteById = new DeleteBookById(bookRepository);
     getById = new GetBookById(bookRepository);
   });
 
-  it('should be able to get a book by id', async () => {
+  it('should be able to delete a book by id', async () => {
     const exampleBook = new Book({
       title: 'Harry Potter',
       description: 'Great book!',
@@ -20,27 +23,14 @@ describe('Get a book by id', () => {
 
     await bookRepository.create(exampleBook);
 
-    await bookRepository.create(
-      new Book({
-        title: 'Harry Potter',
-        description: 'Great book!',
-        bar_code: 'example-bar-code-1',
-      }),
-    );
-
-    await bookRepository.create(
-      new Book({
-        title: 'Harry Potter',
-        description: 'Great book!',
-        bar_code: 'example-bar-code-3',
-      }),
-    );
+    await deleteById.execute({
+      bookId: exampleBook.id,
+    });
 
     const { book } = await getById.execute({
       bookId: exampleBook.id,
     });
 
-    expect(book).toBeTruthy();
-    expect(book).toEqual(exampleBook);
+    expect(book).toBeNull();
   });
 });
