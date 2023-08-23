@@ -8,6 +8,6 @@ describe('Book', () => {
       bar_code: 'example-bar-code',
     });
 
-    expect(book).toBeTruthy;
+    expect(book).toBeTruthy();
   });
 });
