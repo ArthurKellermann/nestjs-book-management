@@ -1,6 +1,5 @@
 import { InMemoryBooksRepository } from '@test/repositories/in-memory-books-repository';
-import { describe } from 'node:test';
-import { CreateBook } from './create-book';
+import { CreateBook } from '../create-book';
 
 describe('Create a book', () => {
   it('should be able to create a book', async () => {
